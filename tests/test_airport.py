@@ -52,13 +52,6 @@ def test_takeoff_plane_that_has_landed_there(mock_plane):
 def test_prevent_takeoff_if_plane_not_landed_there(mock_plane):
     airport = Airport()
     plane = mock_plane
-    plane.is_landed.return_value = False
-
-    airport.land(plane)
-
-    plane.is_landed.return_value = True
-
-    airport2 = Airport()
 
     with pytest.raises(PlaneNotLandedHere):
-        airport2.takeoff(plane)
+        airport.takeoff(plane)
