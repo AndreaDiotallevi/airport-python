@@ -68,3 +68,16 @@ def test_prevent_land_when_whether_is_stormy(mock_plane, mock_weather):
 
     with pytest.raises(StormyWeather):
         airport.land(mock_plane)
+
+def test_prevent_takeoff_when_whether_is_stormy(mock_plane, mock_weather):
+    airport = Airport(weather = mock_weather)
+    mock_plane.is_landed.return_value = False
+    mock_weather.is_stormy.return_value = False
+
+    airport.land(mock_plane)
+
+    mock_plane.is_landed.return_value = True
+    mock_weather.is_stormy.return_value = True
+
+    with pytest.raises(StormyWeather):
+        airport.takeoff(mock_plane)

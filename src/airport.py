@@ -24,6 +24,8 @@ class Airport:
     def takeoff(self, plane):
         if plane not in self.planes:
             raise PlaneNotLandedHere("This plane has not landed here!")
+        elif self.weather.is_stormy():
+            raise StormyWeather("The weather is stormy!")
         self.planes.remove(plane)
         return self.planes
 
