@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import MagicMock
-from src.airport import Airport, AirportIsFull, PlaneAlreadyLanded
+from src.airport import Airport, AirportIsFull, PlaneAlreadyLanded, PlaneNotLandedHere
 from src.plane import Plane
 
 @pytest.fixture
@@ -48,3 +48,17 @@ def test_takeoff_plane_that_has_landed_there(mock_plane):
     plane.is_landed.return_value = True
     
     assert airport.takeoff(plane) == []
+
+def test_prevent_takeoff_if_plane_not_landed_there(mock_plane):
+    airport = Airport()
+    plane = mock_plane
+    plane.is_landed.return_value = False
+
+    airport.land(plane)
+
+    plane.is_landed.return_value = True
+
+    airport2 = Airport()
+
+    with pytest.raises(PlaneNotLandedHere):
+        airport2.takeoff(plane)

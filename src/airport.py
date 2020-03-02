@@ -17,6 +17,8 @@ class Airport:
         return self.planes
 
     def takeoff(self, plane):
+        if plane not in self.planes:
+            raise PlaneNotLandedHere("This plane has not landed here!")
         self.planes.remove(plane)
         return self.planes
 
@@ -24,4 +26,7 @@ class AirportIsFull(Exception):
     pass
 
 class PlaneAlreadyLanded(Exception):
+    pass
+
+class PlaneNotLandedHere(Exception):
     pass
