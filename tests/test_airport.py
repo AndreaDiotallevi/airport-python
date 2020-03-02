@@ -19,10 +19,17 @@ def test_land_plane(mock_plane):
 
 def test_prevent_land_when_airport_is_full(mock_plane):
     airport = Airport()
-    for i in range(airport.CAPACITY):
+    for i in range(airport.capacity):
+        airport.land(mock_plane)
+        
+    with pytest.raises(AirportIsFull):
         airport.land(mock_plane)
 
-    assert len(airport.get_planes()) == airport.CAPACITY
+def test_prevent_land_when_airport_is_full_with_overidden_capacity(mock_plane):
+    capacity = 5
+    airport = Airport(5)
+    for i in range(capacity):
+        airport.land(mock_plane)
         
     with pytest.raises(AirportIsFull):
         airport.land(mock_plane)

@@ -1,14 +1,15 @@
 class Airport:
-    CAPACITY = 10
+    DEFAULT_CAPACITY = 10
 
-    def __init__(self):
+    def __init__(self, capacity = DEFAULT_CAPACITY):
         self.planes = []
+        self.capacity = capacity
 
     def get_planes(self):
         return self.planes
         
     def land(self, plane):
-        if len(self.planes) < self.CAPACITY:
+        if len(self.planes) < self.capacity:
             self.planes.append(plane)
             return self.planes
         else:
