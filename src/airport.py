@@ -9,15 +9,19 @@ class Airport:
         return self.planes
         
     def land(self, plane):
-        if len(self.planes) < self.capacity:
-            self.planes.append(plane)
-            return self.planes
-        else:
+        if len(self.planes) == self.capacity:
             raise AirportIsFull("The airport is full!")
+        elif plane.is_landed:
+            raise PlaneAlreadyLanded("This plane has already landed!")
+        self.planes.append(plane)
+        return self.planes
 
     def takeoff(self, plane):
         self.planes.remove(plane)
         return self.planes
 
 class AirportIsFull(Exception):
+    pass
+
+class PlaneAlreadyLanded(Exception):
     pass
