@@ -4,5 +4,5 @@ class Weather:
     def is_stormy(self):
         roll = random()
         if roll > 0.75:
-            return False
-        return True
+            return True
+        return False

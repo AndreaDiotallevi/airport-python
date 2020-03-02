@@ -19,6 +19,7 @@ class Airport:
         elif self.weather.is_stormy():
             raise StormyWeather("The weather is stormy!")
         self.planes.append(plane)
+        plane.land()
         return self.planes
 
     def takeoff(self, plane):
@@ -27,6 +28,7 @@ class Airport:
         elif self.weather.is_stormy():
             raise StormyWeather("The weather is stormy!")
         self.planes.remove(plane)
+        plane.takeoff()
         return self.planes
 
 class AirportIsFull(Exception):
