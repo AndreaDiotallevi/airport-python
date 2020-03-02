@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import MagicMock
-from src.airport import Airport
+from src.airport import Airport, AirportIsFull
 from src.plane import Plane
 
 @pytest.fixture
@@ -16,6 +16,16 @@ def test_land_plane(mock_plane):
     airport = Airport()
     
     assert airport.land(mock_plane) == [mock_plane]
+
+def test_prevent_land_when_airport_is_full(mock_plane):
+    airport = Airport()
+    for i in range(airport.CAPACITY):
+        airport.land(mock_plane)
+
+    assert len(airport.get_planes()) == airport.CAPACITY
+        
+    with pytest.raises(AirportIsFull):
+        airport.land(mock_plane)
 
 def test_takeoff_plane(mock_plane):
     airport = Airport()
