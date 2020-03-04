@@ -43,3 +43,15 @@ As an air traffic controller
 To ensure safety 
 I want to prevent landing when weather is stormy 
 ```
+
+## Getting Started
+
+* Clone the repository
+* Change into the new repository
+* Create a virtual environment named ```env``` with ```python3 -m venv env```
+* Activate it with ```source env/bin/activate```
+* Install the requirements with ```pip install -r requirements/dev.txt```
+
+## How To Run The Tests
+
+To run the tests type ```pytest```
